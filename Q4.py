@@ -12,13 +12,8 @@ def ieee_baby(num):
         sign = -1
     med = int(two, 2)
     med = 2**(med - 1)
-    frac = 0
-    if three[0] == '1':
-        frac = frac + 0.5
-    if three[1] == '1':
-        frac = frac + 0.25
-    if three[2] == '1':
-        frac = frac + 0.125
+    frac = int(three, 2)
+    frac = 2 ** (-1.0 * frac)
     frac = 1.0 + frac
 
     return sign * med * frac
@@ -44,8 +39,8 @@ totalNum = 0
 for element in babyList:
     totalNum = totalNum + 1
 print("Total number of unique values: ", totalNum)
-#plt.plot(babyList)
-#plt.show()
+plt.plot(babyList)
+plt.show()
 
 #Part B
 #Finding Largest Gap
@@ -73,7 +68,7 @@ print("Smallest gap size: ", smallGap)
 #Smallest Positive Number
 posBabyList = []
 for element in babyList:
-    if element > 0:
+    if element >= 0:
         posBabyList.append(element)
 smallPos = min(posBabyList)
 print("Smallest positive value: ", smallPos)
@@ -82,7 +77,7 @@ print("Smallest positive value: ", smallPos)
 pCount = 0
 nCount = 0
 for element in babyList:
-    if element > 0:
+    if element >= 0:
         pCount = pCount + 1
     if element < 0:
         nCount = nCount + 1
