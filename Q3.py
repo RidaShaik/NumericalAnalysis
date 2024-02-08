@@ -1,9 +1,13 @@
+import math
+
+# function to solve for roots
 def rootSolver(f, a, b, Po, TOL):
     low = a
     high = b
 
     steps = 1
     maxIter = 1000
+
     while steps < maxIter and abs(high - low) > TOL:
         if f(high) - f(low) == 0:
             return bisectionMethod(f, a, b, Po, TOL)
@@ -16,13 +20,11 @@ def rootSolver(f, a, b, Po, TOL):
     else:
         return bisectionMethod(f, a, b, Po, TOL)
 
+# function to solve root using bisection method
 def bisectionMethod(f, a, b, Po, TOL):
     low = a
     high = b
 
-    print (low, " ", high, " ", f(low), " ", f(high))
-    if f(low) * f(high) >= 0:
-        return
     while high - low >= TOL:
         c = (low + high) / 2
         if (f(c) == 0.0):
@@ -33,24 +35,14 @@ def bisectionMethod(f, a, b, Po, TOL):
             low = c
     return c
 
-'''
-    while steps < maxIter:
-        m = (low + high) / 2.0
-        if m == 0 or abs(f(high - low)) < TOL:
-            high = m
-        else:
-            low = m
-        steps += 1
 
-    estimate = (low + high) / 2.0
-    return estimate, steps
-'''
+f1 = lambda x: x**3 - 2 #Defining functions
+f2 = lambda x: (x-2)**2
+f3 = lambda x: x ** (1/3)
 
-#f = lambda x: x**3 - 2
-#f = lambda x: (x-2)**2
-f = lambda x: x ** (1/3)
-
-print(f(-1))
-
-#val = rootSolver(f, -1, 1, 0.5, 0.01)
-#print ("Root: ", val)
+val = rootSolver(f1, 0, 2, 1, 0.01) #Calling root finding functions
+print ("Root for x^3 -2 on [0, 2]: ", val)
+val = rootSolver(f2, 1, 3, 1.5, 0.01)
+print ("Root for (x-2)^2 on [1, 3]: ", val)
+val = rootSolver(f3, -1, 1, 0.5, 0.01)
+print ("Root for x^(1/3) on [-1, 1]: ", val)
